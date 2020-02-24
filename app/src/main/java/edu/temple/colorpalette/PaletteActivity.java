@@ -3,6 +3,8 @@ package edu.temple.colorpalette;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ public class PaletteActivity extends AppCompatActivity {
     String[] colors;
     Resources res;
     ConstraintLayout layout;
+    Context context;
     // The position of the selected item for the spinner. Starts at 0 because array starts at index 0.
     int itemSelectedIndex = 0;
 
@@ -55,6 +58,14 @@ public class PaletteActivity extends AppCompatActivity {
                 String chosenColor = parent.getSelectedItem().toString();
                 // Set the layout background color to that color by parsing the string.
                 layout.setBackgroundColor(Color.parseColor(chosenColor));
+
+
+                // Declares the intent for the canvas activity.
+                Intent intent = new Intent(context, CanvasActivity.class);
+                // Puts the string chosen color into the hash table to be passed to the next activity.
+                intent.putExtra("color", chosenColor);
+                // Starts the new activity.
+                context.startActivity(intent);
             }
 
             @Override
