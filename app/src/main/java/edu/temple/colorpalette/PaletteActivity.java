@@ -3,7 +3,6 @@ package edu.temple.colorpalette;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -18,9 +17,8 @@ public class PaletteActivity extends AppCompatActivity {
     String[] colors;
     Resources res;
     ConstraintLayout layout;
-    Context context;
-    // The position of the selected item for the spinner. Starts at 0 because array starts at index 0.
-    int itemSelectedIndex = 0;
+    // The position of the selected item for the spinner.
+    int itemSelectedPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,7 @@ public class PaletteActivity extends AppCompatActivity {
 
         // Get the spinner and the layout from resources.
         Spinner colorSpinner = findViewById(R.id.spinner_color);
-        layout = findViewById(R.id.constraint_layout_color_activity);
+        layout = findViewById(R.id.constraint_layout_palette_activity);
 
         // Gets the string array from resources and set it equal to string array colors.
         res = getResources();
@@ -46,26 +44,29 @@ public class PaletteActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                // Since the initial view of the spinner is just a prompt, we do nothing when it is automatically selected.
+                if(position == 0){
+                    return;
+                }else{
+                    // Sets the selected position to the position.
+                    itemSelectedPosition = position;
+                    // Since the initial view (position 0) is ignored, we subtract one from subsequent positions.
+                    position = position - 1;
+                }
+
                 // Set the text view color to white upon being selected.
                 view.findViewById(R.id.text_color).setBackgroundColor(Color.WHITE);
 
-                // Sets the selected index to the position.
-                itemSelectedIndex = position;
                 // Set the item selected index variable of color adapter to the index.
-                colorAdapter.setItemSelectedIndex(itemSelectedIndex);
+                colorAdapter.setItemSelectedPosition(itemSelectedPosition);
 
-                // Get the color string of the chosen item from spinner.
-                String chosenColor = parent.getSelectedItem().toString();
+                // Calls getItem of ColorAdapter for the data contained at the position of the string array.
+                String chosenColor = parent.getItemAtPosition(position).toString();
+
                 // Set the layout background color to that color by parsing the string.
                 layout.setBackgroundColor(Color.parseColor(chosenColor));
-
-
-                // Declares the intent for the canvas activity.
-                Intent intent = new Intent(context, CanvasActivity.class);
-                // Puts the string chosen color into the hash table to be passed to the next activity.
-                intent.putExtra("color", chosenColor);
-                // Starts the new activity.
-                context.startActivity(intent);
+                // Start the canvas activity.
+                startCanvasActivity(chosenColor);
             }
 
             @Override
@@ -74,4 +75,12 @@ public class PaletteActivity extends AppCompatActivity {
         });
     }
 
+    public void startCanvasActivity(String chosenColor){
+        // Declares the intent for the canvas activity.
+        Intent intent = new Intent(this, CanvasActivity.class);
+        // Puts the string chosen color into the hash table to be passed to the next activity.
+        intent.putExtra("color", chosenColor);
+        // Starts the new activity.
+        this.startActivity(intent);
+    }
 }
