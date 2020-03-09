@@ -14,8 +14,6 @@ import android.widget.Spinner;
 public class PaletteActivity extends AppCompatActivity {
 
     ColorAdapter colorAdapter;
-    String[] colors;
-    Resources res;
     ConstraintLayout layout;
     // The position of the selected item for the spinner.
     int itemSelectedPosition = 0;
@@ -30,8 +28,8 @@ public class PaletteActivity extends AppCompatActivity {
         layout = findViewById(R.id.constraint_layout_palette_activity);
 
         // Gets the string array from resources and set it equal to string array colors.
-        res = getResources();
-        colors = res.getStringArray(R.array.color_names);
+        Resources res = this.getResources();
+        String[] colors = res.getStringArray(R.array.color_names);
 
         // Create new color adapter using the string array.
         colorAdapter = new ColorAdapter(this, colors);
