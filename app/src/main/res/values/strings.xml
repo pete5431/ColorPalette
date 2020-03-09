@@ -3,6 +3,18 @@
     <string name="spinner_prompt">Select a color</string>
     <string name="activity_palette_name">Palette Activity</string>
     <string name="activity_canvas_name">Canvas Activity</string>
+    <string-array name="color_ids">
+        <item>RED</item>
+        <item>BLUE</item>
+        <item>GREEN</item>
+        <item>YELLOW</item>
+        <item>SILVER</item>
+        <item>CYAN</item>
+        <item>MAGENTA</item>
+        <item>GRAY</item>
+        <item>TEAL</item>
+        <item>PURPLE</item>
+    </string-array>
     <string-array name="color_names">
         <item>RED</item>
         <item>BLUE</item>
