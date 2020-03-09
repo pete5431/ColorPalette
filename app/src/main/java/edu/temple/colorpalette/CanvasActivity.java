@@ -21,12 +21,14 @@ public class CanvasActivity extends AppCompatActivity {
         layout = findViewById(R.id.constraint_layout_canvas_activity);
         colorName = findViewById(R.id.text_canvas_color);
 
-        // Get the chosen color string from intent.
-        String chosenColor = getIntent().getStringExtra("color");
+        // Get the chosen color id from intent.
+        String chosenColorId = getIntent().getStringExtra("color_id");
+        // Get the chosen color name from intent.
+        String chosenColorName = getIntent().getStringExtra("color_name");
 
         // Change the background color of the layout.
-        layout.setBackgroundColor(Color.parseColor(chosenColor));
+        layout.setBackgroundColor(Color.parseColor(chosenColorId));
 
-        colorName.setText(chosenColor);
+        colorName.setText(chosenColorName);
     }
 }

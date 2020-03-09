@@ -11,12 +11,14 @@ import android.widget.TextView;
 public class ColorAdapter extends BaseAdapter {
 
     private Context context;
-    private String[] colors;
+    private String[] color_ids;
+    private String[] color_names;
     // The selected item position.
     private int itemSelectedPosition = 0;
 
-    public ColorAdapter(Context c, String[] colors){
-        this.colors = colors;
+    public ColorAdapter(Context c, String[] color_ids, String[] color_names){
+        this.color_ids = color_ids;
+        this.color_names = color_names;
         this.context = c;
     }
 
@@ -25,15 +27,22 @@ public class ColorAdapter extends BaseAdapter {
         itemSelectedPosition = position;
     }
 
+    // Returns the color name in the position index of color_names array.
+    public String getColorName(int position){
+
+        return color_names[position];
+
+    }
+
     @Override
     public int getCount() {
         // The size will be +1 because an extra initial view is included.
-        return colors.length + 1;
+        return color_ids.length + 1;
     }
 
     @Override
     public Object getItem(int position) {
-        return colors[position];
+        return color_ids[position];
     }
 
     @Override
@@ -106,10 +115,10 @@ public class ColorAdapter extends BaseAdapter {
         position = position - 1;
 
         // Set the text of the text view to the color name.
-        colorText.setText(colors[position]);
+        colorText.setText(color_names[position]);
 
         // Set the background color of the text view.
-        colorText.setBackgroundColor(Color.parseColor(colors[position]));
+        colorText.setBackgroundColor(Color.parseColor(color_ids[position]));
 
         return view;
     }

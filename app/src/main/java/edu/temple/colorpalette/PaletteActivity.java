@@ -27,12 +27,15 @@ public class PaletteActivity extends AppCompatActivity {
         Spinner colorSpinner = findViewById(R.id.spinner_color);
         layout = findViewById(R.id.constraint_layout_palette_activity);
 
-        // Gets the string array from resources and set it equal to string array colors.
+        // Gets resources of the current activity.
         Resources res = this.getResources();
-        String[] colors = res.getStringArray(R.array.color_names);
+        // Gets the string array for the color ids from resources.
+        String[] colors_id = res.getStringArray(R.array.color_ids);
+        // Gets the string array for the color names form resources.
+        String[] color_names = res.getStringArray(R.array.color_names);
 
         // Create new color adapter using the string array.
-        colorAdapter = new ColorAdapter(this, colors);
+        colorAdapter = new ColorAdapter(this, colors_id, color_names);
 
         // Set the adapter of color spinner to color adapter.
         colorSpinner.setAdapter(colorAdapter);
@@ -59,12 +62,15 @@ public class PaletteActivity extends AppCompatActivity {
                 colorAdapter.setItemSelectedPosition(itemSelectedPosition);
 
                 // Calls getItem of ColorAdapter for the data contained at the position of the string array.
-                String chosenColor = parent.getItemAtPosition(position).toString();
+                String chosenColorId = parent.getItemAtPosition(position).toString();
+
+                // Get the chosen color name based off the position.
+                String chosenColorName = colorAdapter.getColorName(position);
 
                 // Set the layout background color to that color by parsing the string.
-                layout.setBackgroundColor(Color.parseColor(chosenColor));
+                layout.setBackgroundColor(Color.parseColor(chosenColorId));
                 // Start the canvas activity.
-                startCanvasActivity(chosenColor);
+                startCanvasActivity(chosenColorId, chosenColorName);
             }
 
             @Override
@@ -73,11 +79,13 @@ public class PaletteActivity extends AppCompatActivity {
         });
     }
 
-    public void startCanvasActivity(String chosenColor){
+    public void startCanvasActivity(String chosenColor, String chosenColorName){
         // Declares the intent for the canvas activity.
         Intent intent = new Intent(this, CanvasActivity.class);
-        // Puts the string chosen color into the hash table to be passed to the next activity.
-        intent.putExtra("color", chosenColor);
+        // Puts the string chosen color id into the hash table to be passed to the next activity.
+        intent.putExtra("color_id", chosenColor);
+        // Puts the string chosen color name into the hash table to be passed to the next activity.
+        intent.putExtra("color_name", chosenColorName);
         // Starts the new activity.
         this.startActivity(intent);
     }
