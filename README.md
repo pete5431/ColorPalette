@@ -8,4 +8,4 @@ the color name and the background set to the color.
 
 Added Spanish Translation.
 
-![TEXT](Paletter_Spanish.png)
+![TEXT](Palette_Spanish.png)
