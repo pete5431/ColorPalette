@@ -7,3 +7,5 @@ will be the respective color. When an item is selected from the spinner, it will
 the color name and the background set to the color. 
 
 Added Spanish Translation.
+
+![TEXT](Paletter_Spanish.png)
