@@ -13,6 +13,8 @@ import android.widget.Spinner;
 
 public class PaletteActivity extends AppCompatActivity {
 
+    PaletteFragment masterFragment;
+
     ColorAdapter colorAdapter;
     ConstraintLayout layout;
     // The position of the selected item for the spinner.
@@ -22,6 +24,8 @@ public class PaletteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_palette);
+
+
 
         // Get the spinner and the layout from resources.
         Spinner colorSpinner = findViewById(R.id.spinner_color);

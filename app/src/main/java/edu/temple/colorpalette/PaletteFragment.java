@@ -11,23 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PaletteFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PaletteFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PaletteFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class PaletteFragment extends Fragment {
+
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String COLOR_ID_ARRAY_TAG = "colorIdArray";
+    private static final String COLOR_NAME_ARRAY_TAG = "colorNameArray";
+
+
+    private String[] colorIdArray;
+    private String[] colorNameArray;
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,20 +28,13 @@ public class PaletteFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PaletteFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PaletteFragment newInstance(String param1, String param2) {
+
+
+    public static PaletteFragment newInstance(String[] colorIdArray, String[] colorNameArray) {
         PaletteFragment fragment = new PaletteFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putStringArray(COLOR_ID_ARRAY_TAG, colorIdArray);
+        args.putStringArray(COLOR_NAME_ARRAY_TAG, colorNameArray);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,8 +43,8 @@ public class PaletteFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            colorIdArray = getArguments().getStringArray(COLOR_ID_ARRAY_TAG);
+            colorNameArray = getArguments().getStringArray(COLOR_ID_ARRAY_TAG);
         }
     }
 
@@ -69,7 +55,7 @@ public class PaletteFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_palette, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
