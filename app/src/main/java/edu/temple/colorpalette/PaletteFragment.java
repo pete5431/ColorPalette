@@ -25,8 +25,6 @@ public class PaletteFragment extends Fragment {
     ColorAdapter colorAdapter;
     int itemSelectedPosition = 0;
 
-    CanvasFragment canvas;
-
     private OnItemSelectedInterface parentActivity;
 
     public PaletteFragment() {
@@ -47,12 +45,12 @@ public class PaletteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             colorIdArray = getArguments().getStringArray(COLOR_ID_ARRAY_TAG);
-            colorNameArray = getArguments().getStringArray(COLOR_ID_ARRAY_TAG);
+            colorNameArray = getArguments().getStringArray(COLOR_NAME_ARRAY_TAG);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
         View fragmentView = inflater.inflate(R.layout.fragment_palette, container, false);
@@ -84,6 +82,8 @@ public class PaletteFragment extends Fragment {
 
                 // Get the chosen color name based off the position.
                 String chosenColorName = colorAdapter.getColorName(position);
+
+                container.setBackgroundColor(Color.parseColor(chosenColorId));
 
                 parentActivity.itemClicked(chosenColorId, chosenColorName);
 
