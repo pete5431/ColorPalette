@@ -83,8 +83,6 @@ public class PaletteFragment extends Fragment {
                 // Get the chosen color name based off the position.
                 String chosenColorName = colorAdapter.getColorName(position);
 
-                container.setBackgroundColor(Color.parseColor(chosenColorId));
-
                 parentActivity.itemClicked(chosenColorId, chosenColorName);
 
             }
