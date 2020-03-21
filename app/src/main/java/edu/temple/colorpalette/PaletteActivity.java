@@ -1,17 +1,14 @@
 package edu.temple.colorpalette;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 
 public class PaletteActivity extends AppCompatActivity implements PaletteFragment.OnItemSelectedInterface{
 
     PaletteFragment masterFragment;
-
-    ConstraintLayout layout;
+    CanvasFragment canvasFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +22,6 @@ public class PaletteActivity extends AppCompatActivity implements PaletteFragmen
         // Gets the string array for the color names form resources.
         String[] color_names = res.getStringArray(R.array.color_names);
 
-        layout = findViewById(R.id.constraint_layout_palette_activity);
-
         // Makes new instance of PaletteFragment.
         masterFragment = PaletteFragment.newInstance(colors_id, color_names);
 
@@ -37,6 +32,11 @@ public class PaletteActivity extends AppCompatActivity implements PaletteFragmen
 
     @Override
     public void itemClicked(String chosenColorId, String chosenColorName) {
-        layout.setBackgroundColor(Color.parseColor(chosenColorId));
+
+        canvasFragment = CanvasFragment.newInstance(chosenColorId, chosenColorName);
+
+        // getSupportFragmentManager().beginTransaction().detach(masterFragment).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container2, canvasFragment).addToBackStack(null).commit();
     }
 }
