@@ -1,4 +1,4 @@
-# ColorPalette-Spanish
+# ColorPalette-Fragments-Spanish
 Name: Peter Zheng / Mobile Application CIS 3515 Section 3
 
 App Function:
@@ -7,3 +7,6 @@ will be the respective color. When an item is selected from the spinner, it will
 the color name and the background set to the color. 
 
 Added Spanish Translation.
+
+Version 1.0.1:
+  -Switched to using fragments instead of multiple activities.
